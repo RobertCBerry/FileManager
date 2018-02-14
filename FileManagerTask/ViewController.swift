@@ -52,15 +52,6 @@ class ViewController: UIViewController {
             
             print("Error getting path.")
         }
-        
-        // Creates userDefault object.
-        
-        let userDefault = UserDefaults.standard
-        
-        // Stores the fileContentTextView string value in the userDefault object.
-        
-        userDefault.set(fileContentTextView.text, forKey: "stored_String") 
-
     }
     
     override func viewDidLoad() {

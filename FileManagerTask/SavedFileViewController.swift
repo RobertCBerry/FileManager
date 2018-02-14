@@ -15,16 +15,26 @@ class SavedFileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // fileManager gets the reference to the FileManager
         
-        // Creates userDefault object.
-        
-        let userDefault = UserDefaults.standard
-        
-        // Returns userDefault string value using key that was used to store data, and displays that data in savedText. 
-        
-        savedText.text = userDefault.string(forKey: "stored_String")! 
-    }
+        let fileManager = FileManager.default
+       
+        do {
+           
+            let documents = try fileManager.url(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask, appropriateFor: nil, create: false)
+           
+            let url = URL(string: "test_document.txt", relativeTo: documents)
+           
+            if let url = url {
+                
+                let textFromFile = try String(contentsOf: url)
+                
+                savedText.text = textFromFile 
+            }
+        } catch {
+            print("Error getting path")
+        }
+    } 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
